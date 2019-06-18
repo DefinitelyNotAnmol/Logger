@@ -1,2 +1,2 @@
 # Logger
-Simple Logging System Header file
+Simple Logging System developed in C++
