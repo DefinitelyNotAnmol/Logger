@@ -1,7 +1,10 @@
 #include <string>
 #include <fstream>
 
-#define DEBUG 1
+#define ON 1
+#define OFF 0
+
+#define DEBUG ON
 
 #if DEBUG
 #include <chrono>
