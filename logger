@@ -1,6 +1,28 @@
 #include <string>
 #include <fstream>
+
+#define DEBUG 1
+
+#if DEBUG
 #include <chrono>
+
+class Timing {
+    std::chrono::time_point<std::chrono::high_resolution_clock> start;
+    std::chrono::time_point<std::chrono::high_resolution_clock> end;
+    std::chrono::duration<float> duration;
+public:
+    Timing() {
+        start = std::chrono::high_resolution_clock::now();
+    }
+    
+    ~Timing() {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        std::cout << duration.count() << std::endl;
+    }
+};
+
+#endif
 
 class Log {
     time_t timestamp;
@@ -21,6 +43,9 @@ public:
 };
 
 bool log(const std::string& error_message) {
+    #if DEBUG
+        Timing T;
+    #endif
     std::fstream file;
     file.open("log.txt", std::fstream::out | std::fstream::app);
     file << Log(error_message).to_string();
